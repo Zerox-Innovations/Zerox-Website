@@ -9,7 +9,11 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
+
+  <link href="assets/img/favicon.jpg" rel="icon">
+
   <link href="assets/img/zeroxpng.png" rel="icon">
+
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Fonts -->
@@ -34,6 +38,43 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+
+  <script type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+  (function(){
+      emailjs.init("yLc3xEHwzK-YbWenS");
+  })();
+
+  // Define the sendMail function before it's used in the onclick handler
+  function sendMail() {
+      var params = {
+          name: document.getElementById("name").value,
+          email: document.getElementById("email").value,
+          subject: document.getElementById("subject").value,
+          message: document.getElementById("message").value
+      };
+
+      const serviceID = "service_xz7cp48";
+      const templateID = "template_r397w8v";
+
+      emailjs.send(serviceID, templateID, params)
+          .then((res) => {
+              // Clear the input fields
+              document.getElementById("name").value = "";
+              document.getElementById("email").value = "";
+              document.getElementById("subject").value = "";
+              document.getElementById("message").value = "";
+
+              console.log(res);
+              alert("Your message was sent successfully");
+          })
+          .catch(err => console.log(err));
+  }
+</script>
+
+
 </head>
 
 <body class="contact-page">
@@ -43,7 +84,7 @@
 
       <a href="index.html" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <img src="assets/img/ZEROX-logo.png" alt="">
         <h1 class="sitename">Zerox</h1>
       </a>
 
@@ -83,19 +124,15 @@
         <div class="row gy-4">
 
           <div class="col-lg-5">
-            <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
+            <!-- <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
               <i class="bi bi-geo-alt flex-shrink-0"></i>
-              <div>
-                <h3>Address</h3>
-                <p>A108 Adam Street, New York, NY 535022</p>
-              </div>
-            </div><!-- End Info Item -->
+            </div>End Info Item -->
 
             <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
               <i class="bi bi-telephone flex-shrink-0"></i>
               <div>
                 <h3>Call Us</h3>
-                <p>+1 5589 55488 55</p>
+                <p>+91 9656 02 3183</p>
               </div>
             </div><!-- End Info Item -->
 
@@ -103,43 +140,47 @@
               <i class="bi bi-envelope flex-shrink-0"></i>
               <div>
                 <h3>Email Us</h3>
-                <p>info@example.com</p>
+                <p>innovationszerox@gmail.com</p>
               </div>
             </div><!-- End Info Item -->
 
           </div>
 
           <div class="col-lg-7">
-            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="500">
+            <div class="contact-fields" data-aos="fade-up" data-aos-delay="500">
               <div class="row gy-4">
-
+          
                 <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
+                  <input type="text" id="name" class="form-control" placeholder="Your Name" required="">
                 </div>
-
-                <div class="col-md-6 ">
-                  <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
+          
+                <div class="col-md-6">
+                  <input type="email" id="email" class="form-control" placeholder="Your Email" required="">
                 </div>
-
+          
                 <div class="col-md-12">
-                  <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
+                  <input type="text" id="subject" class="form-control" placeholder="Subject" required="">
                 </div>
-
+          
                 <div class="col-md-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
+                  <textarea id="message" class="form-control" rows="6" placeholder="Message" required=""></textarea>
                 </div>
-
+          
                 <div class="col-md-12 text-center">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                  <button type="submit">Send Message</button>
+                  <div class="loading" style="display:none;">Loading</div>
+                  <div class="error-message" style="display:none;">There was an error sending your message.</div>
+                  <div class="sent-message" style="display:none;">Your message has been sent. Thank you!</div>
+          
+                  <button type="button" onclick="sendMail()">Send Message</button>
                 </div>
-
+          
               </div>
-            </form>
-          </div><!-- End Contact Form -->
+            </div>
+          </div>
+          
+          
+          
+          <!-- End Contact Form -->
 
         </div>
 
